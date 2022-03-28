@@ -1,24 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { BrowserRouter, Route } from "react-router-dom";
+import Header from "./Components/Header";
+import Homepage from "./Pages/Homepage";
+import UserPage from "./Pages/UserPage";
+import { makeStyles } from "@material-ui/core";
+import Form from "./Components/Form";
+
 
 function App() {
+  const useStyles = makeStyles(() => ({
+    App: {
+      backgroundColor: "#14161a",
+      color: "#fff",
+      minHeight: "100vh",
+    },
+  }));
+
+  const classes = useStyles();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <div className={classes.App}>
+        <Header />
+        <Route path="/" component={Homepage} exact />
+        <Route path="/users/:id" component={UserPage} />
+        <Route path="/login" component={Form}/>
+      </div>
+    </BrowserRouter>
   );
 }
 
